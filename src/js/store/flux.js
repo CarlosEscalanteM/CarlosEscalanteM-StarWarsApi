@@ -1,28 +1,75 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			people: [], 
+			planets: [],
+			vehicles: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			get_people: (nextUrl) => {
+				fetch(nextUrl)
+				.then((response) => {
+				  if (response.status >= 400) {
+					throw new Error(
+					  "Oooops! Something went wrong, young Padawan. Please try again"
+					);
+				  }
+		  
+				  return response.json();
+				})
+				.then((result) => {
+                  if (result.next != null){
+					getActions().get_people(result.next)
+				  }
+
+				  setStore({ people: [...getStore().people,  ...result.results] }); 
+				})
+				.catch((e) => console.log(error));
+			},
+			get_planets: (nextUrl) => {
+				fetch(nextUrl)
+				.then((response) => {
+				  if (response.status >= 400) {
+					throw new Error(
+					  "Oooops! Something went wrong, young Padawan. Please try again"
+					);
+				  }
+		  
+				  return response.json();
+				})
+				.then((result) => {
+					if (result.next != null){
+						getActions().get_planets(result.next)
+					}
+				  setStore({ planets: [...getStore().planets,  ...result.results] }); 
+				})
+				.catch((e) => console.log(error));
+			},
+			get_vehicles: (nextUrl) => {
+				fetch(nextUrl)
+				.then((response) => {
+				  if (response.status >= 400) {
+					throw new Error(
+					  "Oooops! Something went wrong, young Padawan. Please try again"
+					);
+				  }
+		  
+				  return response.json();
+				})
+				.then((result) => {
+					if (result.next != null){
+						getActions().get_vehicles(result.next)
+					}
+				  setStore({ vehicles: [...getStore().vehicles,  ...result.results] }); 
+				})
+				.catch((e) => console.log(error));
 			},
 			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			
+			getActions().get_people("https://www.swapi.tech/api/people")
+			getActions().get_planets("https://www.swapi.tech/api/planets")
+			getActions().get_vehicles("https://www.swapi.tech/api/vehicles")
 			},
 			changeColor: (index, color) => {
 				//get the store

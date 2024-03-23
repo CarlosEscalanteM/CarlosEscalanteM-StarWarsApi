@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const VehicleCard = (props) => {
 	return (
 		<nav className="navbar navbar-dark bg-dark mb-3">
 			<Link to="/">

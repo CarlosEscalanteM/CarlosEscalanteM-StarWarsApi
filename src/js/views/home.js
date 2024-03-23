@@ -1,15 +1,15 @@
-import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import React, {useContext} from "react";
+import { Context } from "../store/appContext";
+import { PeopleCard } from "../component/peoplecard";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
+
+export const Home = () => {
+
+	const { store, actions } = useContext(Context);
+	
+	return <div className="container">
+		<div className=" d-flex gap-3 overflow-scroll">{
+store.people.map((person) => <PeopleCard url={person.url}  />)
+		}</div>		
 	</div>
-);
+};
