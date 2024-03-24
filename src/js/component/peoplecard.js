@@ -1,8 +1,12 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { Context } from "../store/appContext";
 
 export const PeopleCard = (props) => {
+  const { store, actions } = useContext(Context);
   const [properties, setProperties] = useState();
   useEffect(() => {
     // by Default method: 'GET'
@@ -26,13 +30,17 @@ export const PeopleCard = (props) => {
       <img src="https://dummyimage.com/400x200/adadad/ffffff.jpg" class="card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title">{properties.name}</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
-        <a href="#" class="btn btn-primary">
-          Go somewhere
-        </a>
+        <ul class="card-text">
+          <li>Gender: {properties.gender}</li>
+          <li>Hair Color: {properties.hair_color}</li>
+          <li>Eye Color: <span style={{color: properties.eye_color}}>{properties.eye_color}</span></li>
+        </ul>
+        <div className="d-flex justify-content-between">
+          <Link to={`/details/people/${props.id}`} class="btn btn-primary">
+            Learn More!
+          </Link>
+          <button type="button" onClick={() => actions.addFavorite(properties.name)} class="btn btn-outline-warning"><FontAwesomeIcon icon={faHeart} /></button>
+        </div>
       </div>
     </div>
   );

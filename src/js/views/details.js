@@ -84,7 +84,7 @@ export const Details = (props) => {
               <p>{properties.birth_year}</p>
             </div>
 
-			{/* Birth Year Column */}
+			{/* Gender Column */}
             <div className="d-flex flex-column">
               <h1>Gender</h1>
               <p>{properties.gender}</p>

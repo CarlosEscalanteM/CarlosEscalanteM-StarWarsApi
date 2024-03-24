@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			people: [], 
 			planets: [],
-			vehicles: []
+			vehicles: [],
+			favorites: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -65,6 +66,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.catch((e) => console.log(error));
 			},
+
+            addFavorite: (name) => {
+				setStore({ favorites: [...new Set([...getStore().favorites, name])] });
+			},
+
+			removeFavorite: (name) => {
+               const newFavorites = getStore() .favorites.filter((currentName) => currentName != name ) 
+			   setStore({ favorites: newFavorites})
+			},
+
 			loadSomeData: () => {
 			
 			getActions().get_people("https://www.swapi.tech/api/people")
