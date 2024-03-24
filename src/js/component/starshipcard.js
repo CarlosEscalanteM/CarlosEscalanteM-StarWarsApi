@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Context } from "../store/appContext";
 
-export const PlanetCard = (props) => {
+export const StarshipCard = (props) => {
   const { store, actions } = useContext(Context);
   const [properties, setProperties] = useState();
   useEffect(() => {
@@ -26,17 +26,22 @@ export const PlanetCard = (props) => {
       .catch((e) => console.log(error));
   }, []);
   return (
-    properties && (<div class="card col-3">
-        <img src="https://dummyimage.com/400x200/adadad/ffffff.jpg" class="card-img-top" alt="..."/>
+    properties && (
+      <div class="card col-3">
+        <img
+          src="https://dummyimage.com/400x200/adadad/ffffff.jpg"
+          class="card-img-top"
+          alt="..."
+        />
         <div class="card-body">
           <h5 class="card-title">{properties.name}</h5>
           <ul class="card-text">
-		    <li>Diameter : {properties.diameter}</li>
-            <li>Population: {properties.population}</li>
-            <li>Terrain: {properties.terrain}</li>
+            <li>Model: {properties.model}</li>
+            <li>Starship Class: {properties.starship_class}</li>
+            <li>Passengers: {properties.passengers}</li>
           </ul>
           <div className="d-flex justify-content-between">
-            <Link to={`/details/planets/${props.id}`} class="btn btn-primary">
+            <Link to={`/details/starships/${props.id}`} class="btn btn-primary">
               Learn More!
             </Link>
             <button

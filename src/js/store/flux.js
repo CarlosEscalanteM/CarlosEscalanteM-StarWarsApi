@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			people: [], 
 			planets: [],
-			vehicles: [],
+			starships: [],
 			favorites: [],
 		},
 		actions: {
@@ -62,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (result.next != null){
 						getActions().get_vehicles(result.next)
 					}
-				  setStore({ vehicles: [...getStore().vehicles,  ...result.results] }); 
+				  setStore({ starships: [...getStore().starships,  ...result.results] }); 
 				})
 				.catch((e) => console.log(error));
 			},
@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			getActions().get_people("https://www.swapi.tech/api/people")
 			getActions().get_planets("https://www.swapi.tech/api/planets")
-			getActions().get_vehicles("https://www.swapi.tech/api/vehicles")
+			getActions().get_vehicles("https://www.swapi.tech/api/starships")
 			},
 			changeColor: (index, color) => {
 				//get the store
