@@ -11,7 +11,7 @@ export const Home = () => {
 	
 	return <div className="container">
 		<section> 
-			<h1>People</h1>
+			<h1>Characters</h1>
             <div className=" d-flex gap-3 overflow-scroll">{
             store.people.map((people) => <PeopleCard url={people.url} id = {people.uid} />)
 		}
